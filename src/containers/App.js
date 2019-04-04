@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import styles from './App.module.css';
-import Person from './Person/Person';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
     state = {
@@ -9,12 +10,12 @@ class App extends Component {
             {id: 'unique2', name: 'Pablo', age: 18},
             {id: 'unique3', name: 'Larry', age: 23}
         ],
-        isHidden: true
+        showPersons: true
     };
 
     tooglePersonHandler = () => {
-        let isHidden = this.state.isHidden;
-        this.setState({isHidden: !isHidden})
+        let showPersons = this.state.showPersons;
+        this.setState({showPersons: !showPersons})
     };
 
     deletePersonHandler = (personIndex) => {
@@ -48,40 +49,20 @@ class App extends Component {
 
     render() {
         let persons = null;
-        let btnClass = '';
 
-        if (this.state.isHidden === true) {
-            persons = (
-                <div>
-                    {this.state.persons.map((p, index) => {
-                        return <Person
-                            name={p.name}
-                            age={p.age}
-                            key={p.id}
-                            click={() => this.deletePersonHandler(index)}
-                            changed={(event) => this.nameChangeHandler(event, p.id)}/>
-                    })}
-                </div>
-            );
-            btnClass = styles.redBtn;
+        if (this.state.showPersons === true) {
+            persons = <Persons
+                persons={this.state.persons}
+                clicked={this.deletePersonHandler}
+                changed={this.nameChangeHandler}/>;
         }
-
-        const classes = [];
-
-        if (this.state.persons.length >= 1)
-            classes.push(styles.bold);
-        if (this.state.persons.length >= 2)
-            classes.push(styles.shadow);
-        if (this.state.persons.length >= 3)
-            classes.push(styles.red);
 
         return (
             <div className={styles.App}>
-                <h1>Hello, world!</h1>
-                <p className={classes.join(' ')}>--- What's up? ---</p>
-                <button className={btnClass}
-                        onClick={this.tooglePersonHandler}>Toggle ON/OFF
-                </button>
+                <Cockpit
+                    persons={this.state.persons}
+                    showPersons={this.state.showPersons}
+                    clicked={this.tooglePersonHandler}/>
                 {persons}
             </div>
         );

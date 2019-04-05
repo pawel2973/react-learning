@@ -19,11 +19,10 @@ const cockpit = (props) => {
     useEffect(() => {
         console.log('[Cockpit.js] useEffect');
         //Http request...
-        const timer = setTimeout(() => {
+        setTimeout(() => {
             alert('Fake http request run ONCE...')
         }, 1000);
         return () => {
-            clearTimeout(timer); //example cleanup work in use effect
             console.log('[Cockpit.js] cleanup work in useEffect');
             //it runs BEFORE the main useEffect function runs, but after the (first) render cycle
             //that runs right when useEffect runs for the last time depends on second arg you passed to use effect []
@@ -46,11 +45,11 @@ const cockpit = (props) => {
         btnClass = styles.redBtn;
     }
 
-    if (props.persons.length >= 1)
+    if (props.personsLength >= 1)
         classes.push(styles.bold);
-    if (props.persons.length >= 2)
+    if (props.personsLength >= 2)
         classes.push(styles.shadow);
-    if (props.persons.length >= 3)
+    if (props.personsLength >= 3)
         classes.push(styles.red);
 
     return (
@@ -64,4 +63,4 @@ const cockpit = (props) => {
     );
 };
 
-export default cockpit;
+export default React.memo(cockpit);

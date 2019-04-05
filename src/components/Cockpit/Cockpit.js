@@ -17,7 +17,7 @@ const cockpit = (props) => {
 
     return (
         <div className={styles.Cockpit}>
-            <h1>Hello, world!</h1>
+            <h1>{props.title}</h1>
             <p className={classes.join(' ')}>--- What's up? ---</p>
             <button className={btnClass}
                     onClick={props.clicked}>Toggle ON/OFF

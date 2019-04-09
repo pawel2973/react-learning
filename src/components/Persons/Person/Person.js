@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import styles from './Person.module.css';
 import Aux from '../../../hoc/Auxiliary';
+import withClasses from '../../../hoc/withClass';
 
 class Person extends Component {
     render() {
@@ -19,4 +20,4 @@ class Person extends Component {
     }
 }
 
-export default Person; //export person function ES6 feature
+export default withClasses(Person, styles.Person); //export person function ES6 feature

@@ -5,7 +5,7 @@ const cockpit = (props) => {
 
     //Combined componentDidMount & componentDidUpdate
     useEffect(() => {
-        console.log('[Cockpit.js] useEffect');
+        console.log('[Cockpit.js] useEffect input: props.persons');
         //Http request...
         setTimeout(() => {
             alert('Fake http request...')
@@ -17,13 +17,13 @@ const cockpit = (props) => {
 
     //Only run once
     useEffect(() => {
-        console.log('[Cockpit.js] useEffect');
+        console.log('[Cockpit.js] useEffect ONCE...');
         //Http request...
         setTimeout(() => {
             alert('Fake http request run ONCE...')
         }, 1000);
         return () => {
-            console.log('[Cockpit.js] cleanup work in useEffect');
+            console.log('[Cockpit.js] cleanup work in useEffect ONCE...');
             //it runs BEFORE the main useEffect function runs, but after the (first) render cycle
             //that runs right when useEffect runs for the last time depends on second arg you passed to use effect []
         };
@@ -31,7 +31,7 @@ const cockpit = (props) => {
     //If you have no dependencies, they can never change and therefore this can never rerun
 
     useEffect(() => {
-        console.log('[Cockpit.js] 2nd useEffect');
+        console.log('[Cockpit.js] 2nd useEffect: every update cycle');
         return () => {
             console.log('[Cockpit.js] cleanup work in 2nd useEffect');
         };
@@ -64,3 +64,4 @@ const cockpit = (props) => {
 };
 
 export default React.memo(cockpit);
+//Store a snopshot of this component and only if its inputs changes, it will re-render it

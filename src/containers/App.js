@@ -18,7 +18,8 @@ class App extends Component {
             {id: 'unique3', name: 'Larry', age: 23}
         ],
         showPersons: false,
-        showCockpit: true
+        showCockpit: true,
+        changeCounter: 0
     };
 
     static getDerivedStateFromProps(props, state) {
@@ -68,9 +69,12 @@ class App extends Component {
         const personsArray = [...this.state.persons];
         personsArray[personIndex].name = person.name;
 
-        this.setState({
-            persons: personsArray
-        })
+        this.setState((prevState, props) => {
+            return {
+                persons: personsArray,
+                changeCounter: prevState.changeCounter + 1
+            };
+        });
     };
 
     render() {

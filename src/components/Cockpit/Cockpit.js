@@ -62,6 +62,10 @@ const cockpit = (props) => {
                     className={btnClass}
                     onClick={props.clicked}>Toggle ON/OFF
             </button>
+            <br /> <br />
+            <button onClick={props.login}>
+                {props.isAuthenticated ? 'Log out': 'Log in'}
+            </button>
         </div>
     );
 };

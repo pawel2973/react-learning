@@ -25,7 +25,7 @@ class Person extends Component {
         console.log('[Person.js] rendering...');
         return (
             <Aux>
-                {/*<div className={styles.Person}>*/}
+                {this.props.isAuth ? <p>Authenticated</p> : <p>Please log in!</p>}
                 <h1>{this.props.name}</h1>
                 <p>Age: {this.props.age}</p>
                 <p>{this.props.children}</p>
@@ -37,7 +37,6 @@ class Person extends Component {
                     value={this.props.name}
                 />
                 <button onClick={this.props.click}>Delete me!</button>
-                {/*</div>*/}
             </Aux>
         );
     }

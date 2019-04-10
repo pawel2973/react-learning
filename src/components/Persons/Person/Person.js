@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './Person.module.css';
 import Aux from '../../../hoc/Auxiliary';
 import withClasses from '../../../hoc/withClass';
+import AuthContext from '../../../context/auth-context';
 
 class Person extends Component {
     inputElementRef = React.createRef(); //ES7 APPROACH
@@ -23,9 +24,14 @@ class Person extends Component {
 
     render() {
         console.log('[Person.js] rendering...');
+        //<AuthContext.Consumer>
+        //We wrap a function instead of JSX code
+        //This function get context arg. and return JSX code
         return (
             <Aux>
-                {this.props.isAuth ? <p>Authenticated</p> : <p>Please log in!</p>}
+                <AuthContext.Consumer>
+                    {(context) => context.authenticated ? <p>Authenticated</p> : <p>Please log in!</p>}
+                </AuthContext.Consumer>
                 <h1>{this.props.name}</h1>
                 <p>Age: {this.props.age}</p>
                 <p>{this.props.children}</p>

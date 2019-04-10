@@ -1,15 +1,16 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import styles from "./Cockpit.module.css";
 
 const cockpit = (props) => {
+    const toggleBtnRef = useRef(null);
 
     //Combined componentDidMount & componentDidUpdate
     useEffect(() => {
         console.log('[Cockpit.js] useEffect input: props.persons');
-        //Http request...
-        setTimeout(() => {
-            alert('Fake http request...')
-        }, 1000);
+        // //Http request...
+        // setTimeout(() => {
+        //     alert('Fake http request...')
+        // }, 1000);
     }, [props.persons]);
     //Second arg decides when the function should update
     //In this example when the person changed
@@ -18,13 +19,14 @@ const cockpit = (props) => {
     //Only run once
     useEffect(() => {
         console.log('[Cockpit.js] useEffect ONCE...');
-        //Http request...
-        setTimeout(() => {
-            alert('Fake http request run ONCE...')
-        }, 1000);
+        // //Http request...
+        // setTimeout(() => {
+        //     alert('Fake http request run ONCE...')
+        // }, 1000);
+        toggleBtnRef.current.click();
         return () => {
             console.log('[Cockpit.js] cleanup work in useEffect ONCE...');
-            //it runs BEFORE the main useEffect function runs, but after the (first) render cycle
+            //it runs BEFORE the main useEffect function runs, but after the !!!(first) render cycle!!!
             //that runs right when useEffect runs for the last time depends on second arg you passed to use effect []
         };
     }, []);
@@ -56,7 +58,8 @@ const cockpit = (props) => {
         <div className={styles.Cockpit}>
             <h1>{props.title}</h1>
             <p className={classes.join(' ')}>--- What's up? ---</p>
-            <button className={btnClass}
+            <button ref={toggleBtnRef}
+                    className={btnClass}
                     onClick={props.clicked}>Toggle ON/OFF
             </button>
         </div>
